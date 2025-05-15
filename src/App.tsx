@@ -1,12 +1,39 @@
 import React from "react";
-import {motion} from "framer-motion";
+import {ApplicationTheme, useThemeStore} from "./states/ThemeState.ts";
 
 function App(): React.JSX.Element {
     return (
         <React.Fragment>
-            <motion.main animate={{opacity: 1}} initial={{opacity: 0}} className={`bg-blue-300`}>
-            </motion.main>
+            <main>
+                <FirstSection/>
+                <SecondSection/>
+            </main>
         </React.Fragment>
+    )
+}
+
+const FirstSection = (): React.JSX.Element => {
+
+    const {currentTheme, toggleTheme} = useThemeStore();
+    return (
+        <section
+            style={{
+                backgroundColor: ApplicationTheme.getBackgroundColor(currentTheme),
+                color: ApplicationTheme.getForegroundColor(currentTheme)
+            }}
+            className={`w-screen h-screen`}>
+            <button onClick={toggleTheme}>
+                {currentTheme}
+            </button>
+        </section>
+    )
+}
+
+const SecondSection = (): React.JSX.Element => {
+    return (
+        <section>
+
+        </section>
     )
 }
 
